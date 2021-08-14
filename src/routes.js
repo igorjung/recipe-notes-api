@@ -16,7 +16,9 @@ const { Router } = require('express');
 
 const routes = new Router();
 
-routes.get('/', (req, res) => res.json({ message: 'Welcome to Omni CLI' }));
+routes.get('/', (req, res) =>
+  res.json({ message: 'Welcome to Recipe Notes API' })
+);
 
 // Auth
 routes.post('/auth/register', AuthController.register);

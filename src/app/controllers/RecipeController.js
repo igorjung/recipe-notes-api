@@ -17,7 +17,6 @@ import Utensil from '../models/Utensil';
 class RecipeController {
   async index(request, response) {
     // Query Setting
-    const { page = 1, limit = 5 } = request.query;
     const { filters } = request;
 
     // Filter Setting
@@ -40,10 +39,8 @@ class RecipeController {
     }
 
     // Recipes Exists Validation
-    const recipes = await Recipe.findAndCountAll({
+    const recipes = await Recipe.findAll({
       order: [['name', 'asc']],
-      limit: parseInt(limit, 10),
-      offset: (page - 1) * limit,
       distinct: true,
       include: [
         { model: Step, as: 'steps' },
@@ -58,7 +55,7 @@ class RecipeController {
       });
     }
 
-    return response.json({ recipes: recipes.rows, count: recipes.count });
+    return response.json(recipes);
   }
 
   async show(request, response) {

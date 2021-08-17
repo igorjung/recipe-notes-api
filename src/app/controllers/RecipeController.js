@@ -43,7 +43,7 @@ class RecipeController {
       order: [['name', 'asc']],
       distinct: true,
       include: [
-        { model: Step, as: 'steps' },
+        { model: Step, as: 'steps', order: [['order', 'asc']] },
         { model: Ingredient, as: 'ingredients' },
         { model: Utensil, as: 'utensils' },
       ],

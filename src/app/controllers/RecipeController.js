@@ -68,6 +68,7 @@ class RecipeController {
         {
           model: Step,
           as: 'steps',
+          order: [['order', 'asc']],
           include: [
             { model: Ingredient, as: 'ingredients' },
             { model: Utensil, as: 'utensils' },

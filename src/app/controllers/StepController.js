@@ -72,7 +72,6 @@ class StepController {
         .typeError('Descrição da etapa é obrigatório.')
         .required('Descrição da etapa é obrigatório.'),
       time: Yup.string(),
-      order: Yup.number(),
       opcional: Yup.bool(),
       recipe_id: Yup.number()
         .typeError('Falha no cadastro da etapa, confira os dados inseridos.')
@@ -83,6 +82,10 @@ class StepController {
         error: 'Falha no cadastro da etapa, confira os dados inseridos.',
       });
     }
+
+    // Set Order
+    const steps = await Step.count();
+    data.order = steps + 1;
 
     // Post
     const step = await Step.create(data);

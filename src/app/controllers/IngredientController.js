@@ -64,9 +64,7 @@ class IngredientController {
       name: Yup.string()
         .typeError('Nome do ingrediente é obrigatório.')
         .required('Nome do ingrediente é obrigatório.'),
-      quantity: Yup.string()
-        .typeError('Nome do ingrediente é obrigatório.')
-        .required('Nome do ingrediente é obrigatório.'),
+      quantity: Yup.string(),
       cost: Yup.string(),
       opcional: Yup.bool(),
       recipe_id: Yup.number()
@@ -98,9 +96,7 @@ class IngredientController {
       name: Yup.string()
         .typeError('Nome do ingrediente é obrigatório.')
         .required('Nome do ingrediente é obrigatório.'),
-      quantity: Yup.string()
-        .typeError('Nome do ingrediente é obrigatório.')
-        .required('Nome do ingrediente é obrigatório.'),
+      quantity: Yup.string(),
       cost: Yup.string(),
       opcional: Yup.bool(),
       recipe_id: Yup.number()

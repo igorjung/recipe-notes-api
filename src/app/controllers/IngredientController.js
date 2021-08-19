@@ -99,13 +99,6 @@ class IngredientController {
       quantity: Yup.string(),
       cost: Yup.string(),
       opcional: Yup.bool(),
-      recipe_id: Yup.number()
-        .typeError(
-          'Falha no cadastro do ingrediente, confira os dados inseridos.'
-        )
-        .required(
-          'Falha no cadastro do ingrediente, confira os dados inseridos.'
-        ),
       step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {

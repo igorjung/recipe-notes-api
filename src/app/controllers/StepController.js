@@ -104,9 +104,6 @@ class StepController {
       time: Yup.string(),
       order: Yup.number(),
       opcional: Yup.bool(),
-      recipe_id: Yup.number()
-        .typeError('Falha no cadastro da etapa, confira os dados inseridos.')
-        .required('Falha no cadastro da etapa, confira os dados inseridos.'),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({

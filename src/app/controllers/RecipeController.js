@@ -154,9 +154,6 @@ class RecipeController {
         .required('Categoria da receita é obrigatória.'),
       preparation_time: Yup.string(),
       financial_cost: Yup.string(),
-      user_id: Yup.number()
-        .typeError('Falha no cadastro da receita, confira os dados inseridos.')
-        .required('Falha no cadastro da receita, confira os dados inseridos.'),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({

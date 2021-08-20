@@ -178,7 +178,7 @@ class RecipeController {
     const decoded = jwt.verify(auth, authConfig.secret);
     const userId = decoded.id;
 
-    if (data.user_id !== userId) {
+    if (recipe.user_id !== userId) {
       return response
         .status(401)
         .json({ error: 'Ops, ocorreu um erro! Tente novamente mais tarde.' });

@@ -65,6 +65,13 @@ class UtensilController {
         .typeError('Nome do utensílio é obrigatório.')
         .required('Nome do utensílio é obrigatório.'),
       opcional: Yup.bool(),
+      recipe_id: Yup.number()
+        .typeError(
+          'Falha no cadastro do utensílio, confira os dados inseridos.'
+        )
+        .required(
+          'Falha no cadastro do utensílio, confira os dados inseridos.'
+        ),
       step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {
@@ -88,13 +95,6 @@ class UtensilController {
         .typeError('Nome do utensílio é obrigatório.')
         .required('Nome do utensílio é obrigatório.'),
       opcional: Yup.bool(),
-      recipe_id: Yup.number()
-        .typeError(
-          'Falha no cadastro do utensílio, confira os dados inseridos.'
-        )
-        .required(
-          'Falha no cadastro do utensílio, confira os dados inseridos.'
-        ),
       step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {

@@ -28,8 +28,6 @@ class Step extends Model {
       foreignKey: 'recipe_id',
       as: 'recipe',
     });
-    this.hasMany(models.ingredients);
-    this.hasMany(models.utensils);
   }
 }
 

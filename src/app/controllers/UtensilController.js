@@ -17,9 +17,6 @@ class UtensilController {
       if (filters.recipe_id) {
         where.recipe_id = filters.recipe_id;
       }
-      if (filters.step_id) {
-        where.step_id = filters.step_id;
-      }
     }
 
     // Utensils Exists Validation
@@ -72,7 +69,6 @@ class UtensilController {
         .required(
           'Falha no cadastro do utensílio, confira os dados inseridos.'
         ),
-      step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({
@@ -95,7 +91,6 @@ class UtensilController {
         .typeError('Nome do utensílio é obrigatório.')
         .required('Nome do utensílio é obrigatório.'),
       opcional: Yup.bool(),
-      step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({

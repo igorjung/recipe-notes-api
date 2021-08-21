@@ -1,7 +1,6 @@
 // Dependencies
 import * as Yup from 'yup';
 import jwt from 'jsonwebtoken';
-import { Op } from 'sequelize';
 
 // Configs
 import authConfig from '../../config/auth';
@@ -22,24 +21,12 @@ class RecipeController {
     // Filter Setting
     const where = {};
 
-    if (filters) {
-      if (filters.user_id) {
-        where.user_id = filters.user_id;
-      }
-      if (filters.name) {
-        where.name = {
-          [Op.like]: `%${filters.name}%`,
-        };
-      }
-      if (filters.category) {
-        where.category = {
-          [Op.like]: `%${filters.category}%`,
-        };
-      }
+    if (filters && filters.user_id) {
+      where.user_id = filters.user_id;
     }
 
     // Recipes Exists Validation
-    const recipes = await Recipe.findAll({
+    let recipes = await Recipe.findAll({
       order: [['name', 'asc']],
       distinct: true,
       include: [
@@ -53,6 +40,12 @@ class RecipeController {
       return response.json({
         error: 'Não há receitas cadastradas ainda.',
       });
+    }
+
+    if (filters && filters.name) {
+      recipes = recipes.filter(recipe =>
+        recipe.name.toUpperCase().includes(filters.name.toUpperCase())
+      );
     }
 
     return response.json(recipes);
@@ -69,10 +62,6 @@ class RecipeController {
           model: Step,
           as: 'steps',
           order: [['order', 'asc']],
-          include: [
-            { model: Ingredient, as: 'ingredients' },
-            { model: Utensil, as: 'utensils' },
-          ],
         },
         { model: Ingredient, as: 'ingredients' },
         { model: Utensil, as: 'utensils' },

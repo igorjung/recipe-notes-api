@@ -4,10 +4,6 @@ import * as Yup from 'yup';
 // Models
 import Step from '../models/Step';
 
-// Associations
-import Ingredient from '../models/Ingredient';
-import Utensil from '../models/Utensil';
-
 class StepController {
   async index(request, response) {
     // Query Setting
@@ -29,10 +25,6 @@ class StepController {
       limit: parseInt(limit, 10),
       offset: (page - 1) * limit,
       distinct: true,
-      include: [
-        { model: Ingredient, as: 'ingredients' },
-        { model: Utensil, as: 'utensils' },
-      ],
       where,
     });
     if (!steps) {
@@ -50,10 +42,6 @@ class StepController {
 
     // Step Exists Validation
     const step = await Step.findOne({
-      include: [
-        { model: Ingredient, as: 'ingredients' },
-        { model: Utensil, as: 'utensils' },
-      ],
       where: { id },
     });
     if (!step) {

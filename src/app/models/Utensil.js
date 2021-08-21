@@ -10,7 +10,6 @@ class Utensil extends Model {
 
         // Associantions
         recipe_id: Sequelize.INTEGER,
-        step_id: Sequelize.INTEGER,
       },
       {
         modelName: 'utensils',
@@ -26,10 +25,6 @@ class Utensil extends Model {
     this.belongsTo(models.recipes, {
       foreignKey: 'recipe_id',
       as: 'recipe',
-    });
-    this.belongsTo(models.steps, {
-      foreignKey: 'step_id',
-      as: 'step',
     });
   }
 }

@@ -17,9 +17,6 @@ class IngredientController {
       if (filters.recipe_id) {
         where.recipe_id = filters.recipe_id;
       }
-      if (filters.step_id) {
-        where.step_id = filters.step_id;
-      }
     }
 
     // Ingredients Exists Validation
@@ -74,7 +71,6 @@ class IngredientController {
         .required(
           'Falha no cadastro do ingrediente, confira os dados inseridos.'
         ),
-      step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({
@@ -99,7 +95,6 @@ class IngredientController {
       quantity: Yup.string(),
       cost: Yup.string(),
       opcional: Yup.bool(),
-      step_id: Yup.number(),
     });
     if (!(await schema.validate(data))) {
       return response.status(400).json({

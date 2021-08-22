@@ -27,16 +27,20 @@ class RecipeController {
 
     // Recipes Exists Validation
     let recipes = await Recipe.findAll({
-      order: [['name', 'asc']],
       distinct: true,
       include: [
-        { model: Step, as: 'steps', order: [['order', 'asc']] },
+        { model: Step, as: 'steps' },
         {
           model: Ingredient,
           as: 'ingredients',
-          order: [['name', 'asc']],
         },
-        { model: Utensil, as: 'utensils', order: [['name', 'asc']] },
+        { model: Utensil, as: 'utensils' },
+      ],
+      order: [
+        ['name', 'asc'],
+        [Step, 'order', 'asc'],
+        [Ingredient, 'name', 'asc'],
+        [Utensil, 'name', 'asc'],
       ],
       where,
     });
@@ -65,10 +69,20 @@ class RecipeController {
         {
           model: Step,
           as: 'steps',
-          order: [['order', 'asc']],
         },
-        { model: Ingredient, as: 'ingredients' },
-        { model: Utensil, as: 'utensils' },
+        {
+          model: Ingredient,
+          as: 'ingredients',
+        },
+        {
+          model: Utensil,
+          as: 'utensils',
+        },
+      ],
+      order: [
+        [Step, 'order', 'asc'],
+        [Ingredient, 'name', 'asc'],
+        [Utensil, 'name', 'asc'],
       ],
       where: { id },
     });

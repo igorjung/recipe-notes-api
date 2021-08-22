@@ -31,8 +31,12 @@ class RecipeController {
       distinct: true,
       include: [
         { model: Step, as: 'steps', order: [['order', 'asc']] },
-        { model: Ingredient, as: 'ingredients' },
-        { model: Utensil, as: 'utensils' },
+        {
+          model: Ingredient,
+          as: 'ingredients',
+          order: [['name', 'asc']],
+        },
+        { model: Utensil, as: 'utensils', order: [['name', 'asc']] },
       ],
       where,
     });
